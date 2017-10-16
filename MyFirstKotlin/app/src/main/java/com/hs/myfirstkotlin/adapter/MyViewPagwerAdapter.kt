@@ -10,8 +10,9 @@ import com.hs.myfirstkotlin.R
 /**
  * 作者：zhanghaitao on 2017/8/1 17:00
  * 邮箱：820159571@qq.com
+ * viewPager的适配器（伪无限轮播的代码）
  */
-class MyViewPagwerAdapter (context: Context,pageCount: Int): PagerAdapter() {
+class MyViewPagwerAdapter(context: Context, pageCount: Int) : PagerAdapter() {
 
     private var context: Context? = context
     private var pageCount: Int = pageCount
@@ -21,7 +22,7 @@ class MyViewPagwerAdapter (context: Context,pageCount: Int): PagerAdapter() {
     }
 
     override fun getCount(): Int {
-        return pageCount
+        return pageCount * 1000
     }
 
     override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
@@ -32,7 +33,7 @@ class MyViewPagwerAdapter (context: Context,pageCount: Int): PagerAdapter() {
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
         var imageView: ImageView? = ImageView(context)
         var resId: Int
-        when (position) {
+        when (position % pageCount) {
             0 -> {
                 resId = R.drawable.ic_lunbo1
             }
@@ -46,11 +47,17 @@ class MyViewPagwerAdapter (context: Context,pageCount: Int): PagerAdapter() {
                 resId = R.drawable.ic_lunbo4
             }
         }
+
         imageView?.setImageDrawable(container?.context?.resources?.getDrawable(resId))
+
         var layoutParams: ViewGroup.LayoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
         imageView?.layoutParams = layoutParams
+
         imageView?.scaleType = ImageView.ScaleType.CENTER_CROP
+
         container?.addView(imageView)
+
         return imageView!!
     }
 
