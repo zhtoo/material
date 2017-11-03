@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
         myViewPager.adapter = MyViewPagwerAdapter(this, 4)
         myViewPager.currentItem = 0
         startPlay()
+
+        var str:String = "my name is rd"
+
+        str = str.replace("rd","hs")
+
     }
 
     var handler = object : Handler() {
